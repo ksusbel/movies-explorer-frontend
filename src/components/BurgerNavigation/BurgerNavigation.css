@@ -1,0 +1,13 @@
+.burger-menu {
+    display: flex;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: #202020;
+    width: 100%;
+    height: 100%;
+}
+.burger-menu_opened {
+    display: flex;
+    flex-direction: row;
+}

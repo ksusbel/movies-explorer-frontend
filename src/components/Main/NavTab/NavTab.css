@@ -1,0 +1,39 @@
+.nav-tab {    
+    margin: 0 auto;   
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;    
+  }
+  
+  .nav-tab__button {
+    color: #fff; 
+    border-radius: 10px;
+    background-color: #303030;
+
+    font-size: 10px;    
+    font-weight: 500;
+    line-height: 16px;
+
+    
+    
+    
+    text-decoration: none;
+    text-align: center;
+    width: 82px;    
+    padding: 10px 0;   
+  }
+
+  @media screen and (min-width: 768px) {
+    .nav-tab__buttonn {  
+      font-size: 12px;      
+        max-width: 768px;
+    }
+  }
+  
+  @media screen and (min-width: 1024px) {
+    .nav-tab__button {
+      font-size: 12px;
+      width: 96px;
+    }
+  }

@@ -1,0 +1,16 @@
+.page {
+  background: #202020;
+  margin: 0;
+  color: #fff;
+  font-family: "Inter", Arial, sans-serif;
+  min-height: 100vh;
+}
+
+.basic-el {
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.basic-el:hover {
+  opacity: 0.8;
+}

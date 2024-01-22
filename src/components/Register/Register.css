@@ -1,0 +1,101 @@
+.register {
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto;
+}
+
+.register__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.register__title {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0 0 40px 0;
+  text-align: center;
+}
+
+.register__fild-name {
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #8b8b8b;
+  margin: 0 0 10px 0;
+}
+
+.register__input {
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border: none;
+  color: #fff;
+  background-color: #2f2f2f;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 0 0 20px 0;
+}
+
+.register__error {
+  color: #ee3465;
+}
+
+.register__button {
+  background-color: #4285f4;
+  color: #fff;
+  margin: 69px 0 16px 0;
+  width: 100%;
+  text-align: center;
+  padding: 0;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  height: 45px;
+  border-radius: 3px;
+  border: none;
+}
+
+.register__signin {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 6px;
+}
+
+.register__signin_text {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+  color: #8b8b8b;
+}
+
+.register__link {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+  text-decoration: none;
+  color: #4285f4;
+  padding: 0;
+}
+.register__link:hover {
+  opacity: 0.7;
+}
+
+.register__button:hover {
+  opacity: 0.8;
+}
+
+@media screen and (min-width: 768px) {
+  .register {
+      max-width: 369px;
+  }
+}
