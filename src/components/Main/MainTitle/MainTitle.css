@@ -1,13 +1,11 @@
 .main-title {
     border-bottom: 1px solid #DADADA;
     color: #FFF;
-
 font-size: 18px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
-letter-spacing: -0.88px;
-   
+letter-spacing: -0.88px;   
     padding: 0 0 23px 0;
     margin: 0 auto;
     max-width: 284px;
@@ -19,11 +17,15 @@ letter-spacing: -0.88px;
     .main-title {        
         max-width: 668px;
     }
+
+    .main-title {
+      font-size: 22px;
+    }
   }
   
   @media screen and (min-width: 1024px) {
     .main-title {
-        font-size: 22px;
-        max-width: 1100px;
+        
+        max-width: 1140px;
     }
   }

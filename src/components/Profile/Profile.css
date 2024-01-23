@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
-  padding: 74px 0;
+  padding: 71px 0;
   max-width: 260px;
   width: 100%;
 }
@@ -72,7 +72,13 @@
 }
 
 @media screen and (min-width: 768px) {
-  .register {
+  .profile {
       max-width: 369px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .profile {
+      max-width: 410px;
   }
 }

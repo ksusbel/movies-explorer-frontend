@@ -12,6 +12,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  margin: 0 0 20px 0;
 }
 
 .footer__block {
@@ -46,7 +47,7 @@
 @media screen and (min-width: 768px) {
   .footer {
       max-width: 708px;
-      padding: 80px 30px 20px 30px;
+      padding: 45px 27px 20px 27px;
   }
   .footer__title {
       font-size: 13px;

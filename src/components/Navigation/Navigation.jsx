@@ -1,22 +1,22 @@
 import { Link, NavLink } from "react-router-dom";
 import "./Navigation.css";
+import BurgerNavigation from "../BurgerNavigation/BurgerNavigation";
+import "../BurgerNavigation/BurgerNavigation.css"
 
-function Navigation({ onClickBurger }) {
+function Navigation() {
     const classNameLink = ({ isActive }) => `navigation__nav-link ${isActive ? "navigation__nav-link_basic" : ""} basic-el`;
-
+    function showBurger(){
+        document.querySelector(".navigation__burger-menu-hidden").style.display = "block";
+        
+        };
+        
+       
     return (
+      
         <div className="navigation">
-            <Link to="/" className="navigation__logo" aria-label="На главную"></Link>
+            
             <div className="navigation__nav">
-                <nav className="navigation__nav-links navigation__signout">
-                    <Link to="/signin" className="navigation__nav-link">
-                        Регистрация
-                    </Link>
-                    <Link to="/signup" className="navigation__nav-link navigation__nav-link_signin">
-                        Войти
-                    </Link>
-                </nav>
-
+          
                 <nav className="navigation__nav-links navigation__signin">
                     <ul className="navigation__nav-links_list">
                         <li>
@@ -36,7 +36,12 @@ function Navigation({ onClickBurger }) {
                     Аккаунт
                 </Link>
             </div>
-            <div className="navigation__burger-menu-button" onClick={onClickBurger}></div>
+           
+            <div className="navigation__burger-menu-button" onClick={showBurger}></div>
+            <div className="navigation__burger-menu-hidden">
+                <BurgerNavigation></BurgerNavigation>
+            </div>
+            
         </div>
     );
 }

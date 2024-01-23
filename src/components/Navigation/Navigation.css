@@ -4,6 +4,8 @@
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
+  width: 100%;
+  z-index: 1;
 }
 
 .navigation__nav {
@@ -15,47 +17,26 @@
   width: 100%;
 }
 
-.navigation__logo {
-  width: 38px;
-  height: 38px;
-  background-image: url(../../images/logo.svg);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.navigation__link {
-  font-size: 14px;
-  line-height: 18px;
-  color: white;
-  text-decoration: none;
-}
-
 .navigation__nav-links {
   display: flex;
   flex-direction: row;
   gap: 30px;
-  align-items: center;
+  align-items: center;  
   width: 100%;
+  margin: 0;
 }
 
 .navigation__nav-link {
   color: #fff;
   text-decoration: none;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
 }
 
 .navigation__link_account {
   display: none;
-}
-
-.navigation__nav-link_signin {
-  color: #000;
-  padding: 8px 20px;
-  background-color: #3ddc84;
-  border-radius: 3px;
 }
 
 .navigation__signin {
@@ -63,16 +44,18 @@
 }
 
 .navigation__signout {
-  justify-content: right;
-  display: none;
+  justify-content: right; 
 }
 
 .navigation__nav-links_list {
   display: flex;
   flex-direction: row;
-  gap: 30px;
-  align-items: center;
+  gap: 19px;
+  align-items: flex-start;
+  justify-items: center;
   list-style-type: none;
+  margin: 0;
+  padding: 0 0 0 65px;
 }
 
 .navigation__nav-link_bacic {
@@ -89,23 +72,48 @@
   height: 44px;
   cursor: pointer;
   display: block;
-  margin: 15px 0 15px 30px;
+  margin: 0 0 0 20px;
 }
 
-@media screen and (min-width: 1024px) {
-  .navigation__burger-menu-button {
-      display: none;
+.navigation__burger-menu-hidden {  
+  display:none;  
+  z-index: 10;
+}
+
+.navigation__burger-menu-button:focus + .navigation__burger-menu-hidden{
+  display: flex; 
+  
   }
+  
+  @media screen and (min-width: 768px) {
+    .movies-cards-list__list {
+        grid-template-columns: repeat(auto-fit, minmax(339px, 1fr));
+        gap: 47px 30px;
+    }
+
+    
+  }
+
+@media screen and (min-width: 1024px) {  
   .navigation__signin {
       display: flex;
       justify-content: center;
   }
 
   .navigation__link_account {
-      width: 100%;
-      padding: 8px 0;
+      width: 100px;
+      padding: 8px 6px;
       background-color: #313131;
       border-radius: 20px;
-      flex-basis: 100px;
+      font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 16px;
+  }
+
+  .navigation__burger-menu-button {
+    display: none;
   }
 }
+
+

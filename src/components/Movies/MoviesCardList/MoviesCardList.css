@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   gap: 50px;
-  padding: 70px 0 80px 0;
+  padding: 80px 0 80px 0;
 }
 
 .movies-cards-list__list {
@@ -30,6 +30,7 @@
   max-width: 320px;
   min-height: 36px;
   width: 100%;
+  margin: 25px 0 0 0;
 }
 
 @media screen and (min-width: 768px) {
@@ -42,6 +43,6 @@
 @media screen and (min-width: 1024px) {
   .movies-cards-list__list {
       grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-      gap: 59px 30px;
+      gap: 57px 30px;
   }
 }

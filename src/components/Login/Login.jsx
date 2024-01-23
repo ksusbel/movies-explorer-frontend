@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
 import "../Register/Register.css";
+import "./Login.css"
 
 function Login() {
     return (
@@ -15,14 +16,14 @@ function Login() {
                     <span className="register__fild-name">Пароль</span>
                     <input className="register__input" id="password" name="password" type="password" autoComplete="off" required />
                     <span className="register__error"></span>
-                    <button type="submit" className="register__button">
+                    <button type="submit" className="register__button login__button">
                         Войти
                     </button>
                 </form>
-                <div className="register__signin">
-                    <p className="register__signin_text">Уже зарегистрированы?</p>
-                    <Link to="login" className="register__link">
-                        Войти
+                <div className="register__signin login__signin">
+                    <p className="register__signin_text">Еще не зарегистрированы?</p>
+                    <Link to="/signup" className="register__link ">
+                        Регистрация
                     </Link>
                 </div>
             </div>
