@@ -35,7 +35,11 @@
   line-height: 18px;
 }
 
-.navigation__link_account {
+.navigation__nav-link:hover, .navigation__link-account:hover, .navigation__burger-menu-button:hover {
+  opacity: 0.7;
+}
+
+.navigation__link-account {
   display: none;
 }
 
@@ -47,7 +51,7 @@
   justify-content: right; 
 }
 
-.navigation__nav-links_list {
+.navigation__nav-links-list {
   display: flex;
   flex-direction: row;
   gap: 19px;
@@ -100,7 +104,7 @@
       justify-content: center;
   }
 
-  .navigation__link_account {
+  .navigation__link-account {
       width: 100px;
       padding: 8px 6px;
       background-color: #313131;

@@ -1,7 +1,7 @@
 import MoviesCard from "../MoviesCard/MoviesCard";
 import "../../Movies/MoviesCardList/MoviesCardList.css";
 
-function MoviesCardList(props) {
+function MoviesCardList() {
     return (
         <section className="movies-cards-list">
             <ul className="movies-cards-list__list">
@@ -15,7 +15,9 @@ function MoviesCardList(props) {
                 <MoviesCard></MoviesCard>
                 <MoviesCard></MoviesCard>
             </ul>
-            <button className="movies-cards-list__button-more">Ещё</button>
+            <button type="button" className="movies-cards-list__more-button">
+                Ещё
+            </button>
         </section>
     );
 }

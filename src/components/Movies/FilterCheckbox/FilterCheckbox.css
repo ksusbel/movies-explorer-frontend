@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   gap: 13px;
-  margin: 30px auto 40px auto;  
+  margin: 46px auto 40px auto;
 }
 
 .filter-checkbox__block {
@@ -15,11 +15,15 @@
   position: relative;
 }
 
+.filter-checkbox__block:hover {
+  opacity: 0.7;
+}
+
 .filter-checkbox__name {
-  font-size: 12px;
-font-style: normal;
-font-weight: 400;
-line-height: 18px;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
 }
 
 .filter-checkbox__block input[type="checkbox"] {
@@ -61,6 +65,14 @@ line-height: 18px;
 
 @media screen and (min-width: 768px) {
   .filter-checkbox {
-    margin: 40px auto 40px auto; 
+      margin: 40px auto 40px auto;
+  }
+  .filter-checkbox__name {
+      font-size: 11px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .filter-checkbox {
+      margin: 30px auto 40px auto;
   }
 }

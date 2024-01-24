@@ -1,6 +1,6 @@
 .movies-card {
   display: grid;
-  grid-template-columns: auto 54px 14px;
+  grid-template-columns: auto 54px;
   grid-template-rows: auto auto;
   row-gap: 14px;
   position: relative;
@@ -22,7 +22,7 @@
   font-weight: 500;
   line-height: normal;
   white-space: nowrap;
-  margin: 0 0 0 14px;
+  margin: 0;
 }
 
 .movies-card__time {
@@ -40,7 +40,7 @@
   height: 15px;
 }
 
-.movies-card__save_button {
+.movies-card__save-button {
   position: absolute;
   top: 14px;
   right: 14px;
@@ -50,7 +50,12 @@
   opacity: 0;
 }
 
-.movies-card__save_button_saved {
+.movies-card__save-button_not-saved:hover,
+.movies-card__save-button_saved:hover {
+  opacity: 0.7;
+}
+
+.movies-card__save-button_saved {
   background-image: url(../../../images/save3.svg);
   background-size: contain;
   background-repeat: no-repeat;
@@ -60,7 +65,7 @@
   opacity: 1;
 }
 
-.movies-card__save_button_not-saved {
+.movies-card__save-button_not-saved {
   background-image: url(../../../images/save3d.svg);
   background-size: contain;
   background-repeat: no-repeat;
@@ -69,42 +74,44 @@
   align-self: center;
 }
 
-.movies-card:hover .movies-card__save_button_not-saved {
+.movies-card:hover .movies-card__save-button_not-saved {
   opacity: 1;
 }
 
 @media screen and (min-width: 768px) {
-  .movies-card {  
-    max-width: 339px;
-}
-  .movies-card__image {   
-    height: 190px;
+  .movies-card {
+      max-width: 339px;
+      grid-template-columns: auto 54px;
+      grid-template-rows: auto auto;
   }
-  .movies-card__title {   
-    margin: 10px 0 0 0;
+  .movies-card__image {
+      height: 190px;
+  }
+  .movies-card__title {
+      margin: 10px 0 0 0;
   }
 
-  .movies-card__time {    
-    margin: 10px 0 0 0;
-   
+  .movies-card__time {
+      margin: 10px 0 0 0;
   }
 }
 
 @media screen and (min-width: 1024px) {
-  .movies-card {  
-    max-width: 360px;
-}
-  .movies-card__image {   
-    height: 201px;
-  }  
-
-  .movies-card__title {    
-    margin: 0 14px 0 0;
-   
+  .movies-card {
+      max-width: 360px;
+      grid-template-columns: auto 54px 14px;
+      grid-template-rows: auto auto;
+      row-gap: 14px;
+  }
+  .movies-card__image {
+      height: 201px;
   }
 
-  .movies-card__time {    
-    margin: 0 14px 0 0;
-   
+  .movies-card__title {
+      margin: 0 0 0 14px;
+  }
+
+  .movies-card__time {
+      margin: 0 14px 0 0;
   }
 }

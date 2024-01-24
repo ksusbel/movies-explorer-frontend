@@ -4,6 +4,10 @@
   color: #fff;
   font-family: "Inter", Arial, sans-serif;
   min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
 }
 
 .basic-el {
