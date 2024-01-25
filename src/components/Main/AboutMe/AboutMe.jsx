@@ -16,7 +16,7 @@ function AboutMe() {
                         <br />
                         Увлекаюсь 3D-моделированием. Есть дочь.
                     </p>
-                    <a href="https://github.com/ksusbel" className="about-me__link" _blank>
+                    <a href="https://github.com/ksusbel" className="about-me__link" target="_blank">
                         GitHub
                     </a>
                 </div>

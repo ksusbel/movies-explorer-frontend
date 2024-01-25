@@ -62,7 +62,7 @@
   opacity: 1;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 385px) {
   .movies-card {
       max-width: 339px;
       grid-template-columns: auto 54px;
@@ -80,7 +80,7 @@
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
   .movies-card {
       max-width: 360px;
       grid-template-columns: auto 54px 14px;

@@ -1,8 +1,8 @@
 .footer {
   margin: 0 auto;
-  padding: 45px 10px 20px 10px;
-  width: 100%;
-  max-width: 300px;
+  padding: 45px 0 20px 0;
+  width: 92%;
+  max-width: 320px;
 }
 
 .footer__title {
@@ -50,7 +50,7 @@
   opacity: 0.7;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 465px) {
   .footer {
       max-width: 708px;
       padding: 45px 0 20px 0;
@@ -70,7 +70,7 @@
   .footer__block {
       flex-direction: row;
       justify-content: space-between;
-      padding: 20px 0 0 0;
+      padding: 20px 14px 0 14px;
       gap: 0;
   }
 
@@ -80,7 +80,7 @@
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
   .footer {
       max-width: 1140px;
       padding: 80px 0 20px 0;

@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  max-width: 320px;
+  max-width: 292px; 
   margin: 0 auto;
   padding: 0;
 }
@@ -21,9 +21,9 @@
   margin: 220px 0 0 0;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 465px) {
   .promo {
-      max-width: 750px;
+      max-width: 750px; 
       padding: 0 0 28px 0;
   }
 
@@ -35,7 +35,7 @@
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 465px) {
   .promo {
       max-width: 1200px;
   }

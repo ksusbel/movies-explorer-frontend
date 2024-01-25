@@ -96,7 +96,7 @@
   text-align: center;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 465px) {
   .about-project {
       max-width: 680px;
       padding: 90px 0 75px 0;
@@ -149,7 +149,7 @@
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
   .about-project {
       max-width: 1140px;
       padding: 112px 0 100px 0;

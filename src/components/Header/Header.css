@@ -1,8 +1,8 @@
 .header {
-  width: 100%;
-  max-width: 292px;
+  width: 92%;
+  max-width: 320px;
   margin: 0 auto 20px auto;
-  padding: 15px 0 0 0;
+  padding: 15px 14px 0 14px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -50,10 +50,10 @@
   line-height: 16px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 465px) {
   .header {
-      max-width: 708px;
-      padding: 14px 0 0 0;
+      max-width: 740px;
+      padding: 14px;
   }
 
   .header__logo {
@@ -79,9 +79,9 @@
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
   .header {
       max-width: 1140px;
-      padding: 18px 0 0 0;
+      padding: 18px 14px 0 14px;
   }
 }

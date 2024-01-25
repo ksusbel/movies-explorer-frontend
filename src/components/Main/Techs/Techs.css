@@ -55,7 +55,7 @@
   text-align: center;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 465px) {
   .techs {
       max-width: 768px;
       background-color: #272727;
@@ -82,7 +82,7 @@
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
   .techs {
       max-width: 1280px;
       padding: 97px 0 12px 0;

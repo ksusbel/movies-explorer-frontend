@@ -56,7 +56,7 @@
   opacity: 0.7;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 320px) {
   .search-form {
       max-width: 708px;
       margin: 77px auto 0 auto;
@@ -76,7 +76,7 @@
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
   .search-form {
       max-width: 1140px;
   }

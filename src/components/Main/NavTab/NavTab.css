@@ -24,7 +24,7 @@
   opacity: 0.7;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 465px) {
   .nav-tab {
       margin: 315px 0 0 0;
       gap: 10px;
@@ -39,7 +39,7 @@
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
   .nav-tab {
       margin: 150px 0 0px 0;
   }

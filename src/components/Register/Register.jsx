@@ -24,7 +24,7 @@ function Register() {
                 </form>
                 <div className="register__signin">
                     <p className="register__signin-text">Уже зарегистрированы?</p>
-                    <Link to="login" className="register__link">
+                    <Link to="/signin" className="register__link">
                         Войти
                     </Link>
                 </div>
