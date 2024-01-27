@@ -1,0 +1,29 @@
+.main-title {
+  border-bottom: 1px solid #dadada;
+  color: #fff;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.72px;
+  padding: 0 0 28px 0;
+  margin: 0 auto;
+  max-width: 284px;
+  width: 100%;
+}
+
+@media screen and (min-width: 465px) {
+  .main-title {
+      max-width: 668px;
+      font-size: 22px;
+      letter-spacing: -0.88px;
+      padding: 0 0 23px 0;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .main-title {
+      max-width: 1140px;
+      padding: 0 0 24px 0;
+  }
+}
