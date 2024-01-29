@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/static/css/main.5778de82.css",
+    "main.js": "/static/js/main.bf4ae52d.js",
+    "static/js/787.5ac42188.chunk.js": "/static/js/787.5ac42188.chunk.js",
+    "static/media/Inter-Black.ttf": "/static/media/Inter-Black.5bc9c4d5770576fe98af.ttf",
+    "static/media/Inter-Medium.ttf": "/static/media/Inter-Medium.9cbff87dc577185b8630.ttf",
+    "static/media/Inter-Regular.ttf": "/static/media/Inter-Regular.96ce55e3ba0d6a209090.ttf",
+    "static/media/Inter-Black.woff": "/static/media/Inter-Black.fd37f7e052bea1018058.woff",
+    "static/media/Inter-Regular.woff": "/static/media/Inter-Regular.34ed58565339f4f3be40.woff",
+    "static/media/Inter-Black.woff2": "/static/media/Inter-Black.141c7af6ed109b318513.woff2",
+    "static/media/Inter-Regular.woff2": "/static/media/Inter-Regular.4c96ed73beaf6d1e6cc7.woff2",
+    "static/media/Inter-Medium.woff": "/static/media/Inter-Medium.9053572c46aeb4b16caa.woff",
+    "static/media/my_photo.jpg": "/static/media/my_photo.926603317603a3f88d69.jpg",
+    "static/media/Inter-Medium.woff2": "/static/media/Inter-Medium.293fd13dbca5a3e450ef.woff2",
+    "static/media/save3d.svg": "/static/media/save3d.b3d8109d17b3fec1231b.svg",
+    "index.html": "/index.html",
+    "static/media/find-3.svg": "/static/media/find-3.4bc12a31f6a365e36769.svg",
+    "static/media/dell_d3.svg": "/static/media/dell_d3.3888e0189effdea53508.svg",
+    "static/media/logo.svg": "/static/media/logo.25a2943c9f92a986c1fa.svg",
+    "static/media/burger.svg": "/static/media/burger.111cfc3a3545a9ff785c.svg",
+    "static/media/close.svg": "/static/media/close.d29fe99e15dcb5bff2b9.svg",
+    "static/media/main_arrow.svg": "/static/media/main_arrow.21d4a41cbd169bf0c5fe.svg",
+    "static/media/save3.svg": "/static/media/save3.5dfe0e1a2135f4090292.svg",
+    "main.5778de82.css.map": "/static/css/main.5778de82.css.map",
+    "main.bf4ae52d.js.map": "/static/js/main.bf4ae52d.js.map",
+    "787.5ac42188.chunk.js.map": "/static/js/787.5ac42188.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5778de82.css",
+    "static/js/main.bf4ae52d.js"
+  ]
+}
