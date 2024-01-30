@@ -1,6 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
-
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { useState,  useEffect, useCallback } from "react";
 import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 //import moviesApi from "../../utils/MoviesApi";
 import mainApi from "../../utils/MainApi";
@@ -17,77 +15,117 @@ import Profile from "../Profile/Profile";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import Footer from "../Footer/Footer";
 import * as userAuth from "../../utils/auth";
+import { withRouter } from "../withRouter/withRouter";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-
-function App() {
-  //  const [movies, setMovies] = useState([]);
-    const [currentUser, setCurrentUser] = useState({});
+function App() {   
+    const [currentUser, setCurrentUser] = useState({
+        name: "",
+        email: "",
+        _id: ""
+      });
     const [loggedIn, setLoggedIn] = useState(false); 
-    const [userEmail, setUserEmail] = useState("");
-    const [movies, setMovies] = useState([]);
+    const [userEmail, setUserEmail] = useState(""); 
+    const [userName, setUserName] = useState("");   
+   // const [movies, setMovies] = useState([]);
+    const [savedMovies, setSavedMovies] = useState([]);  
+    const [isProfileMess, setIsProfileMess] = useState(false);
+    
   const navigate = useNavigate();
 
-  
+  useEffect(() => {
+    handleTokenCheck();
+  }, []);
 
-  const onRegister = ({ password, email, name }) => {
+  const handleSaveMovie = (movie) => {
+    mainApi
+      .saveMovie(movie)
+      .then((data) => {
+        setSavedMovies([data, ...savedMovies]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleDelMovie = (movie) => {
+    const savedMovie = savedMovies.find(
+      (item) => item.movieId === movie.movieId
+    );
+
+    mainApi
+      .delSaveMovie(savedMovie._id)
+      .then(() => {
+        const newMoviesList = savedMovies.filter(
+          (item) => item._id !== savedMovie._id
+        );
+
+        setSavedMovies(newMoviesList);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+   function handleUpdateUser(name, email) {
+    mainApi
+        .editUserInfo(name, email)
+        .then((res) => {
+            setCurrentUser({
+              name: res.name,
+              email: res.email
+            });            
+            setIsProfileMess(true);
+            setCurrentUser(res);            
+        })
+        .catch((err) => {
+            console.log(`Ошибка: ${err}`);
+        })
+        .finally(() => {
+            setTimeout(() => setIsProfileMess(false), 500)
+        })        
+        ;}
+
+   const onRegister = ({ password, email, name }) => {
     return userAuth
         .register({ password, email, name })
-        .then(() => {
-         //   setRegistrationSuccess(true);
-         //   handleShowInfoTooltip();
+        .then((res) => {       
+          setUserName(res.name);
             navigate("/movies");
         })
-        .catch((res) => {
-        //    setRegistrationSuccess(false);
-       //     handleShowInfoTooltip();
+        .catch((res) => {       
             console.log("Пользователь с таким email уже зарегистрирован");
             return res;
         });
 };
 
-const onLogin = (data) => {
+ const onLogin = (data) => {
   return userAuth
       .authorize(data)
       .then((res) => {
-          localStorage.setItem("token", res.token);
-      //    handleTokenCheck();
-          setUserEmail(data.email);
-      //    console.log(data.email);
+          localStorage.setItem("token", res.token);            
+          setUserEmail(res.email); 
+          setCurrentUser({
+            name: res.name,
+            email: res.email
+          });         
+          console.log(res.name);
           setLoggedIn(true);
           navigate("/movies");
       })
-      .catch((err) => {
-        //  setRegistrationSuccess(false);
-        //  handleShowInfoTooltip();
+      .catch((err) => {       
           console.log("Неправильные имя пользователя или пароль");
           console.log(`Ошибка: ${err}`);
-          navigate("/sign-in");
+          navigate("/signin");
       });
 };
-
-useEffect(() => {
-  if (loggedIn) {
-      mainApi.getUserInfo()
-          .then((data) => {
-              setCurrentUser(data);
-          })
-          .catch((err) => {
-              console.log(`Ошибка: ${err}`);
-          });
-      mainApi.getInitialCards()
-          .then((initialCards) => {
-              setMovies(initialCards);
-          })
-          .catch((err) => {
-              console.log(`Ошибка: ${err}`);
-          });
-  }
-}, [loggedIn]);
 
 const onSignOut = () => {
   localStorage.removeItem("token");
   setLoggedIn(false);
-  navigate("/signin");
+  setSavedMovies([]);
+  setCurrentUser({ name: "", email: "", _id: "" });
+  navigate("/");
 };
 
 const handleTokenCheck = useCallback(() => {
@@ -97,10 +135,12 @@ const handleTokenCheck = useCallback(() => {
   }
   userAuth
       .getContent(jwt)
-      .then((data) => {
-          setUserEmail(data.email);
+      .then((res)  => {
+        if (res) {                  
+          setUserEmail(res.email);        
           setLoggedIn(true);
-          navigate("/");
+          navigate("/movies");
+        }
       })
       .catch((err) => {
           console.log(`Ошибка: ${err}`);
@@ -108,41 +148,81 @@ const handleTokenCheck = useCallback(() => {
 });
 
 useEffect(() => {
-  handleTokenCheck();
-}, []);
+  if (loggedIn) {      
+      mainApi.getInitialCards()
+          .then((initialCards) => {
+              setSavedMovies(initialCards);
+          })
+          .catch(() => {
+              console.log(`Ошибка`);
+          });
+  }
+}, [loggedIn]);
 
 useEffect(() => {
   if (loggedIn) {
-      navigate("/");
+      navigate("/movies");
   }
 }, [loggedIn]);
 
     return (
         <div className="page">
-             <CurrentUserContext.Provider value={currentUser}>
-            <Header loggedIn={loggedIn} email={userEmail} onSignOut={onSignOut} />
+              <CurrentUserContext.Provider  value={currentUser}> 
+            <Header  loggedIn={loggedIn} />
             <Routes>
                 <Route path="/" element={<Main />} />
-                <Route 
-                    path="/movies" element={
-                    <ProtectedRoute
-                        loggedIn={loggedIn}
+                <Route  path="/movies"
+                     element={
+                     <ProtectedRoute
+                     exact                    
                         component={Movies}
-                        movies={movies}
+                        loggedIn={loggedIn}                        
+                     //   movies={movies}
                         email={userEmail}
-                    />                 
+                        savedMovies={savedMovies}
+                        onSaveMovie={handleSaveMovie}
+                        onDelMovie={handleDelMovie}                                          
+                     />            
                     }
                     />
-                <Route path="/saved-movies" element={<SavedMovies />} />
+                <Route path="/saved-movies" element={
+                     <ProtectedRoute
+                     exact
+                        component={SavedMovies}
+                        loggedIn={loggedIn}                        
+                     //   movies={movies}
+                        email={userEmail} 
+                        onSaveMovie={handleSaveMovie}
+                        onDelMovie={handleDelMovie} 
+                        savedMovies={savedMovies}                        
+                     />            
+                    }
+                    />
                 <Route path="/signup" element={<Register onRegister={onRegister} />} />
                 <Route path="/signin" element={<Login onLogin={onLogin} />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="*" element={loggedIn ? <Navigate to="/" /> : <NotFoundPage />} />
+                <Route path="/profile" element={
+                
+            //     <Profile onHandleUpdateUser={handleUpdateUser}
+            //    email={userEmail}              
+            //    onSignOut={onSignOut} />
+                <ProtectedRoute
+               exact
+               component={Profile}  
+               loggedIn={loggedIn}                
+               onUpdateUser={handleUpdateUser}
+               profileEmail={userEmail}  
+               profileName={userName}             
+               onSignOut={onSignOut}
+               isProfileMess={isProfileMess}
+            />           
+           }
+           />               
+                <Route path="*"  element={!loggedIn ? <Navigate to="/" /> : <NotFoundPage />} />
             </Routes>
             <Footer />
-              </CurrentUserContext.Provider>  
+               </CurrentUserContext.Provider>  
         </div>
     );
 }
 
-export default App;
+export default withRouter(App);

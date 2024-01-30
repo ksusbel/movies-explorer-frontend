@@ -1,22 +1,22 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link/* , useLocation  */} from "react-router-dom";
 
 import "./Header.css";
 import Navigation from "../Navigation/Navigation";
 
-function Header() {
-    const location = useLocation();
+function Header({ loggedIn }) {
+    /* const location = useLocation();
     const pagesHeader = ["/", "/movies", "/saved-movies", "/profile"];
 
     if (!pagesHeader.includes(location.pathname)) {
         return null;
     }
-    const loggedIn = location.pathname !== '/';   
+    const loggedIn = location.pathname !== '/';    */
 
     return (
         
         <header className="header">            
             <Link to="/" className="header__logo" aria-label="На главную"></Link>
-            {!loggedIn ? (                
+            {!loggedIn && (                
             <nav className="header__nav-links">
                     <Link to="/signup" className="header__nav-link">
                         Регистрация
@@ -25,9 +25,10 @@ function Header() {
                         Войти
                     </Link>
                 </nav>                
-               ) : (
+               )}
+                {loggedIn && (
             <Navigation></Navigation>
-)}
+                )}
         </header>
     );
 }

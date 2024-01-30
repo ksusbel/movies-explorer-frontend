@@ -98,6 +98,60 @@
   opacity: 0.7;
 }
 
+.profile__edit-results {
+  margin: 0 0 20px 0;
+  text-align:center
+}
+
+.profile__edit-result {
+  color: #FF004C;
+font-size: 11px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+.profile__edit-result_hidden {
+  display: none;
+}
+
+.profile__err {
+visibility: hidden;
+color: #FF004C;
+font-size: 11px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+.profile__err_visible {
+  visibility: visible;
+}
+
+.profile__submit-button {  
+  background-color: #4285f4;
+  color: #fff;
+  margin: 160px 0 16px 0;
+  width: 100%;
+  text-align: center;
+  padding: 0;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  height: 45px;
+  border-radius: 3px;
+  border: none;
+}
+.hover {
+    opacity: 0.7;    
+}
+
+.profile__submit-button:disabled {
+  background-color: #F8F8F8;
+  color: #C2C2C2;
+}
+
 @media screen and (min-width: 350px) {
   .profile {
       max-width: 260px;

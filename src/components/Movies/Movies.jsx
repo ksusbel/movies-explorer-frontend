@@ -1,34 +1,36 @@
 import { useState, useEffect } from 'react';
 import SearchForm from "./SearchForm/SearchForm";
-//import Preloader from "./Preloader/Preloader";
+import Preloader from "./Preloader/Preloader";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import "./Movies.css";
 //import mainApi from '../../utils/MainApi';
 import moviesApi from '../../utils/MoviesApi';
 import filterMovies from  '../../utils/FilterMovies';
 
-function Movies() {
+function Movies({ savedMovies, onSaveMovie, onDelMovie }) {
     const [movies, setMovies] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+   
 
-    // при открытии главной страницы с фильмами загрузили все сохраненки в хранилище key = savedMovies
-   useEffect(() => {
+ /*      // при открытии главной страницы с фильмами загрузили все сохраненки в хранилище key = savedMovies
+    useEffect(() => {
     const savedMovies = localStorage.getItem('savedMovies');
     if (!savedMovies) {
       setIsLoading(true);
        mainApi
         .getUserInfo()
-        .then((data) => {
-          if (data.length > 0) {
+        .then((data) => { 
+                 
+           if (data.length > 0) {
             localStorage.setItem('savedMovies', JSON.stringify(data));
-          }
+          } 
           setIsLoading(false);
         })
         .catch(() => {
             console.log("Неправильные");
         }); 
     }
-  }, []);
+  }, []);    */
  
   useEffect(() => {        
     moviesApi.getInitialMovies()
@@ -42,9 +44,9 @@ function Movies() {
 
 
       // поиск
-  const filter = (request, shorts) => {
+  const filter = (shortFilms, request) => {
     const storedMovies = JSON.parse(localStorage.getItem('movies'));
-    const filtered = filterMovies(storedMovies, request, shorts);
+    const filtered = filterMovies(storedMovies, shortFilms, request);
     if (filtered.length === 0) {
         console.log("Неправильные");
     }
@@ -52,8 +54,8 @@ function Movies() {
     setIsLoading(false);
   };
 
-// кнопки НAQNB
-const handleButtonSearch = (request, shorts) => {
+// кнопки 
+const handleButtonSearch = (shortFilms, request) => {
     setIsLoading(true);  
     const savedMovies = JSON.parse(localStorage.getItem('movies'));
     if (!savedMovies) {
@@ -61,25 +63,25 @@ const handleButtonSearch = (request, shorts) => {
         .getInitialMovies()
         .then((films) => {          
           localStorage.setItem('movies', JSON.stringify(films));
-          filter(request, shorts);
+          filter(shortFilms, request);
         })
         .catch(() => {
             console.log("Неправильные");
         });
     } else {
-      filter(request, shorts);
+      filter(shortFilms, request);
     }
   };
 
     return (
         <main className="movies">
-            <SearchForm handleButtonSearch={handleButtonSearch} ></SearchForm>
+            <SearchForm handleSearchMovies={handleButtonSearch} ></SearchForm>
         
- {/*            {isLoading ? (
+             {isLoading ? (
         <Preloader />
-      ) : ( */}
-            <MoviesCardList movies={movies} />
-            {/* )} */}
+      ) : ( 
+            <MoviesCardList movies={movies} savedMovies={savedMovies} onSaveMovie={onSaveMovie} onDelMovie={onDelMovie} />
+             )} 
         </main>
     );
 }

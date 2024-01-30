@@ -14,43 +14,58 @@ class MainApi {
     };
 
     getInitialCards() {
-        return fetch(`${this._baseUrl}/cards`, {
+        return fetch(`${this._baseUrl}/movies`, {
             method: "GET",
             headers: this._headers,
         }).then(this._handleResponse);
-    }
+    }  
 
-    addNewCard(data) {
-        return fetch(`${this._baseUrl}/cards`, {
-            method: "POST",
-            headers: this._headers,
-            body: JSON.stringify(data),
-        }).then(this._handleResponse);
-    }
+    
+// Сохранение фильма 
+  saveMovie(movie) {
+    return fetch(`${this._baseUrl}/movies`, {
+        method: 'POST',
+      headers: this._headers,      
+      body: JSON.stringify({
+        country: movie.country,
+        director: movie.director,
+        duration: movie.duration,
+        year: movie.year,
+        description: movie.description,
+        image: `https://api.nomoreparties.co${movie.image.url}`,
+        trailerLink: movie.trailerLink,
+        thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
+        movieId: movie.id.toString(),
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN,
+      }),
+    }).then((res) => {
+        return this._handleResponse(res);
+    });
+  }
+// удаление фильма из сохраненных
+  delSaveMovie(idMovie) {
+    return fetch(`${this._baseUrl}/movies/${idMovie}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then((res) => {
+        return this._handleResponse(res);
+    });
+  }
 
-    removeCard(idCard) {
-        return fetch(`${this._baseUrl}/cards/${idCard}`, {
-            method: "DELETE",
-            headers: this._headers,
-            body: JSON.stringify({
-                _id: `${idCard}`,
-            }),
-        }).then(this._handleResponse);
-    }
-
-    changeLikeCardStatus(idCard, isLiked) {
-        return fetch(`${this._baseUrl}/cards/${idCard}/likes`, {
-            method: isLiked ? "DELETE" : "PUT",
-            headers: this._headers,
+    getUserInfo() {
+        return fetch(`${this._baseUrl}/users/me`, {
+            metod: "GET",
+            headers: this._headers,           
         }).then((res) => {
             return this._handleResponse(res);
         });
     }
 
-    getUserInfo() {
-        return fetch(`${this._baseUrl}/users/me`, {
+    getUserInfoId(idUser) {
+        return fetch(`${this._baseUrl}/users/${idUser}`, {
             metod: "GET",
-            headers: this._headers,
+            headers: this._headers,           
         }).then((res) => {
             return this._handleResponse(res);
         });
@@ -65,17 +80,7 @@ class MainApi {
             return this._handleResponse(res);
         });
     }
-
-    // Редактирование аватара
-    editAvatar(data) {
-        return fetch(`${this._baseUrl}/users/me/avatar`, {
-            method: "PATCH",
-            headers: this._headers,
-            body: JSON.stringify(data),
-        }).then((res) => {
-            return this._handleResponse(res);
-        });
-    }
+   
 
     getAllInfo() {
         return Promise.all([this.getUser(), this.getInitialCards()]);
@@ -86,7 +91,8 @@ const mainApi = new MainApi({
     baseUrl: BASE_URL,
     headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,   
-        "Content-Type": "application/json",
+        "Content-Type": "application/json;charset=utf-8",
+        "Cross-Origin-Resource-Policy": "cross-origin",        
     },
 });
 

@@ -8,7 +8,9 @@
     "@testing-library/user-event": "^13.5.0",
     "babel-preset-react-app": "^10.0.1",
     "cors": "^2.8.5",
+    "csp": "^0.0.1-alpha1",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "navigate": "^0.3.6",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -22,8 +24,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "npm run build && scp -r ./build/* ksusbel@158.160.140.107:/home/ksusbel/frontend"
   },
   "eslintConfig": {
     "extends": [

@@ -11,3 +11,5 @@ export const CARDS_VAL_850 = 2;
 export const MAX_CARDS_VAL = 2;
 
 export const SHORT_DURATION = 40;
+
+//export const BAD_REQUEST_CODE = 400;

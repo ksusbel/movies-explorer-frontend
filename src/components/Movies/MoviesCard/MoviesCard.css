@@ -24,6 +24,10 @@
   line-height: normal;
   white-space: nowrap;
   margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 270px;
 }
 
 .movies-card__time {

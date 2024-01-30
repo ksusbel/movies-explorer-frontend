@@ -4,7 +4,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import { CARDS_1280, CARDS_850, MAX_CARDS, CARDS_VAL_1280, CARDS_VAL_850, MAX_CARDS_VAL } from "../../../utils/constants";
 import "./MoviesCardList.css";
 
-function MoviesCardList({ movies }) {
+function MoviesCardList({ movies, savedMovies, onSaveMovie, onDelMovie }) {
     const [listMovies, setListMovies] = useState(0); 
     const [row, setRow] = useState(0);
     const location = useLocation();  
@@ -48,7 +48,7 @@ function MoviesCardList({ movies }) {
             {movies.map((movie, count) => {
             if (count < listMovies) {
               return (
-                <MoviesCard key={movie.id} movie={movie} />
+                <MoviesCard key={movie.id} movie={movie} savedMovies={savedMovies} onSaveMovie={onSaveMovie} onDelMovie={onDelMovie}/>
               );
             }
             return null;

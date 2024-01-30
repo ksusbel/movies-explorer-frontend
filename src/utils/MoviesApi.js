@@ -25,6 +25,7 @@ const moviesApi = new MoviesApi({
   url: BASE_URL_MOVIES,
   headers: {
     "Content-Type": "application/json",
+    "Cross-Origin-Resource-Policy": "cross-origin",
 },
 });
 
