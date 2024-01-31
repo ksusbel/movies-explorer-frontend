@@ -18,7 +18,7 @@ function Login({ onLogin }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         onLogin({ password, email })
-            .then(resetForm)     
+            .then(resetForm)
             .catch((err) => setError(err.error || "Что-то пошло не так"));
     };
 
