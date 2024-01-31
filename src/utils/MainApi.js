@@ -1,9 +1,9 @@
 import { BASE_URL } from "./constants";
 
 class MainApi {
-    constructor(options) {
-        this._baseUrl = options.baseUrl;
-        this._headers = options.headers;
+    constructor({ baseUrl }) {
+        this._baseUrl = baseUrl;
+      //  this._headers = options.headers;
     }
 
     _handleResponse = (res) => {
@@ -16,7 +16,12 @@ class MainApi {
     getInitialCards() {
         return fetch(`${this._baseUrl}/movies`, {
             method: "GET",
-            headers: this._headers,
+            headers: {
+                //Accept: "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                "Cross-Origin-Resource-Policy": "cross-origin",
+            }
         }).then(this._handleResponse);
     }
 
@@ -24,7 +29,12 @@ class MainApi {
     saveMovie(movie) {
         return fetch(`${this._baseUrl}/movies`, {
             method: "POST",
-            headers: this._headers,
+            headers: {
+               // Accept: "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                "Cross-Origin-Resource-Policy": "cross-origin",
+            },
             body: JSON.stringify({
                 country: movie.country,
                 director: movie.director,
@@ -47,7 +57,12 @@ class MainApi {
     delSaveMovie(idMovie) {
         return fetch(`${this._baseUrl}/movies/${idMovie}`, {
             method: "DELETE",
-            headers: this._headers,
+            headers: {
+                //Accept: "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                "Cross-Origin-Resource-Policy": "cross-origin",
+            }
         }).then((res) => {
             return this._handleResponse(res);
         });
@@ -66,7 +81,12 @@ class MainApi {
     editUserInfo(data) {
         return fetch(`${this._baseUrl}/users/me`, {
             method: "PATCH",
-            headers: this._headers,
+            headers: {
+              //  Accept: "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                "Cross-Origin-Resource-Policy": "cross-origin",
+            },
             body: JSON.stringify(data),
         }).then((res) => {
             return this._handleResponse(res);
@@ -80,11 +100,11 @@ class MainApi {
 
 const mainApi = new MainApi({
     baseUrl: BASE_URL,
-    headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+  /*   headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json;charset=utf-8",
         "Cross-Origin-Resource-Policy": "cross-origin",
-    },
+    }, */
 });
 
 export default mainApi;

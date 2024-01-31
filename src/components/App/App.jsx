@@ -19,106 +19,38 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 function App() {
     const [currentUser, setCurrentUser] = useState({});
     const [loggedIn, setLoggedIn] = useState(false);
-    const [userEmail, setUserEmail] = useState("");
-    const [userName, setUserName] = useState("");
+    const [userEmail, setUserEmail] = useState("");  
     const [savedMovies, setSavedMovies] = useState([]);
     const [isProfileMess, setIsProfileMess] = useState(false);
-
-    const navigate = useNavigate();
-
+   
+    const navigate = useNavigate();    
+     
     useEffect(() => {
         handleTokenCheck();
     }, []);
 
     useEffect(() => {
         if (loggedIn) {
-            mainApi
+             userAuth
                 .getUserInfo()
                 .then((user) => {
                     setCurrentUser(user);
                 })
                 .catch((err) => {
                     console.error(`Пользователь не найден: ${err}`);
+                }); 
+            mainApi
+                .getInitialCards()
+                .then((initialCards) => {
+                    setSavedMovies(initialCards);
+                })
+                .catch((err) => {
+                    console.log(`Ошибка: ${err}`);
                 });
         }
-    }, [loggedIn]);
-
-    const handleSaveMovie = (movie) => {
-        mainApi
-            .saveMovie(movie)
-            .then((data) => {
-                setSavedMovies([data, ...savedMovies]);
-            })
-            .catch((err) => {
-                console.log(`Ошибка: ${err}`);
-            });
-    };
-
-    const handleDelMovie = (movie) => {
-        const savedMovie = savedMovies.find((item) => item.movieId === movie.movieId);
-        mainApi
-            .delSaveMovie(savedMovie._id)
-            .then(() => {
-                const newMoviesList = savedMovies.filter((c) => c._id !== savedMovie._id);
-                setSavedMovies(newMoviesList);
-            })
-            .catch((err) => {
-                console.log(`Ошибка: ${err}`);
-            });
-    };
-
-    function handleUpdateUser(newUserInfo) {
-        mainApi
-            .editUserInfo(newUserInfo)
-            .then((data) => {
-                setCurrentUser(data);
-                setIsProfileMess(true);
-            })
-            .catch((err) => {
-                console.log(`Ошибка: ${err}`);
-            })
-            .finally(() => {
-                setTimeout(() => setIsProfileMess(false), 500);
-            });
-    }
-
-    const onRegister = ({ password, email, name }) => {
-        return userAuth
-            .register({ password, email, name })
-            .then((res) => {
-                setUserName(res.name);
-                navigate("/movies");
-            })
-            .catch((res) => {
-                console.log("Пользователь с таким email уже зарегистрирован");
-                return res;
-            });
-    };
-
-    const onLogin = (data) => {
-        return userAuth
-            .authorize(data)
-            .then((res) => {
-                localStorage.setItem("token", res.token);
-                setUserEmail(res.email);
-                setLoggedIn(true);
-                navigate("/movies");
-            })
-            .catch((err) => {
-                console.log("Неправильные имя пользователя или пароль");
-                console.log(`Ошибка: ${err}`);
-                navigate("/signin");
-            });
-    };
-
-    const onSignOut = () => {
-        localStorage.removeItem("token");
-        setLoggedIn(false);
-        setSavedMovies([]);
-        setCurrentUser({ name: "", email: "", _id: "" });
-        navigate("/");
-    };
-
+    }, [loggedIn]);   
+    
+    
     const handleTokenCheck = useCallback(() => {
         const jwt = localStorage.getItem("token");
         if (!jwt) {
@@ -138,18 +70,125 @@ function App() {
             });
     });
 
-    useEffect(() => {
-        if (loggedIn) {
+    const handleSaveMovie = (movie) => {
+        mainApi
+            .saveMovie(movie)
+            .then((data) => {
+                setSavedMovies([data, ...savedMovies]);
+            })
+            .catch((err) => {
+                console.log(`Ошибка: ${err}`);
+            });
             mainApi
                 .getInitialCards()
                 .then((initialCards) => {
                     setSavedMovies(initialCards);
                 })
-                .catch(() => {
-                    console.log(`Ошибка`);
+                .catch((err) => {
+                    console.log(`Ошибка: ${err}`);
                 });
+            
+    };
+
+    const handleDelMovie = (movie) => {
+        const savedMovie = savedMovies.find((item) => item.movieId === movie.movieId);
+        mainApi
+            .delSaveMovie(savedMovie._id)
+            .then(() => {
+                const newMoviesList = savedMovies.filter((c) => c._id !== savedMovie._id);
+                setSavedMovies(newMoviesList);
+            })
+            .catch((err) => {
+                console.log(`Ошибка: ${err}`);
+            });            
+    };
+
+    function handleMovieSaveDelete(savedMovie) {   
+        mainApi
+          .delSaveMovie(savedMovie._id)
+          .then(() => {
+            setSavedMovies((savedMovies) => savedMovies.filter((c) => c._is !== savedMovie._id))
+          })
+          .catch((err) => console.log(err));
+
+        //  setTimeout(() =>
+            mainApi
+                .getInitialCards()
+                .then((initialCards) => {
+                     setSavedMovies(initialCards);                   
+                })
+                .catch((err) => {
+                    console.log(`Ошибка: ${err}`);
+                })
+                //, 5000);
+
         }
-    }, [loggedIn]);
+
+    function handleUpdateUser(newUserInfo) {
+        mainApi
+            .editUserInfo(newUserInfo)
+            .then((data) => {
+                setCurrentUser(data);
+                setIsProfileMess(true);
+            })
+            .catch((err) => {
+                console.log(`Ошибка: ${err}`);
+            })
+            .finally(() => {
+                setTimeout(() => setIsProfileMess(false), 500);
+            });
+    }
+
+    const onRegister = ({ password, email, name }) => {
+        return userAuth
+            .register({ password, email, name })
+            .then((data) => {
+              //  setUserName(res.name);
+              if (data) {
+                onLogin({ email, password });
+                console.log("Успех");                
+              } else {
+                navigate("/");
+              }
+            })             
+            .catch((res) => {
+                console.log("Пользователь с таким email уже зарегистрирован");
+                return res;
+            });
+    };
+
+    const onLogin = (data) => {
+        return userAuth
+            .authorize(data)
+            .then((res) => {
+                if (res.token) {
+                localStorage.setItem("token", res.token);
+               userAuth.getContent(res.token).then((res) => {
+                if (res) {
+                    setTimeout(() => navigate("/movies"), 1000);
+                    setLoggedIn(true);
+                }
+               });
+            }
+        })    
+            .catch(() => {
+                console.log("Неправильные имя пользователя или пароль");                
+                navigate("/signin");
+            });
+    };
+
+    
+
+    const onSignOut = () => {
+        localStorage.removeItem("token");
+        setLoggedIn(false);
+        setSavedMovies([]);
+        setCurrentUser({ name: "", email: "", _id: "" });
+        navigate("/");
+    };
+
+    
+   
 
     useEffect(() => {
         if (loggedIn) {
@@ -164,12 +203,12 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Main />} />
                     <Route path="/movies" element={<ProtectedRoute exact component={Movies} loggedIn={loggedIn} email={userEmail} savedMovies={savedMovies} onSaveMovie={handleSaveMovie} onDelMovie={handleDelMovie} />} />
-                    <Route path="/saved-movies" element={<ProtectedRoute exact component={SavedMovies} loggedIn={loggedIn} email={userEmail} onSaveMovie={handleSaveMovie} onDelMovie={handleDelMovie} savedMovies={savedMovies} />} />
+                    <Route path="/saved-movies" element={<ProtectedRoute exact component={SavedMovies} loggedIn={loggedIn} email={userEmail} onSaveMovie={handleSaveMovie} onDelMovie={handleMovieSaveDelete} savedMovies={savedMovies} />} />
                     <Route path="/signup" element={<Register onRegister={onRegister} />} />
                     <Route path="/signin" element={<Login onLogin={onLogin} />} />
                     <Route
                         path="/profile"
-                        element={<ProtectedRoute exact component={Profile} loggedIn={loggedIn} onUpdateUser={handleUpdateUser} profileEmail={userEmail} profileName={userName} onSignOut={onSignOut} isProfileMess={isProfileMess} />}
+                        element={<ProtectedRoute exact component={Profile} loggedIn={loggedIn} onUpdateUser={handleUpdateUser} profileEmail={userEmail} onSignOut={onSignOut} isProfileMess={isProfileMess} />}
                     />
                     <Route path="*" element={!loggedIn ? <Navigate to="/" /> : <NotFoundPage />} />
                 </Routes>
