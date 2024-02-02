@@ -1,6 +1,6 @@
 import { SHORT_DURATION } from "./constants";
 
-function searchFilter(array, request, shortFilms) {
+function searchFilter(array, request, shortMovies) {
     if (!array) {
         return [];
     }
@@ -9,7 +9,7 @@ function searchFilter(array, request, shortFilms) {
     if (request) {
         filterMovies = filterMovies.filter((el) => el.nameRU.toLowerCase().includes(request.toLowerCase()));
     }
-    if (shortFilms) {
+    if (shortMovies) {
         return filterMovies.filter((el) => el.duration <= SHORT_DURATION);
     }
     return filterMovies;

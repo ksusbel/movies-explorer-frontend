@@ -4,7 +4,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import "../../Movies/MoviesCardList/MoviesCardList.css";
 import { CARDS_1280, CARDS_850, MAX_CARDS, CARDS_VAL_1280, CARDS_VAL_850, MAX_CARDS_VAL } from "../../../utils/constants";
 
-function MoviesCardList({ movies, savedMovies, onDelMovie }) {
+function MoviesCardList({ savedMovies, onDelMovie }) {
     const [listMovies, setListMovies] = useState(0);
     const [row, setRow] = useState(0);
     const location = useLocation();
@@ -18,7 +18,7 @@ function MoviesCardList({ movies, savedMovies, onDelMovie }) {
     const setMoviesStandarts = () => {
         const widthCard = window.innerWidth;
         if (location.pathname === "/saved-movies") {
-            setListMovies(movies.length);
+            setListMovies(savedMovies.length);
         }
         if (widthCard <= 850) {
             setListMovies(MAX_CARDS);
@@ -44,14 +44,14 @@ function MoviesCardList({ movies, savedMovies, onDelMovie }) {
     return (
         <section className="movies-cards-list">
             <ul className="movies-cards-list__list">
-                {movies.map((movie, count) => {
+                {savedMovies.map((saveMovie, count) => {
                     if (count < listMovies) {
-                        return <MoviesCard key={movie.id} movie={movie} name={movie.nameRU} duration={movie.duration} trailerLink={movie.trailerLink} thumbnail={movie.thumbnail} savedMovies={savedMovies} onDelMovie={onDelMovie} />;
+                        return <MoviesCard key={saveMovie.id} saveMovie={saveMovie} name={saveMovie.nameRU} duration={saveMovie.duration} trailerLink={saveMovie.trailerLink} thumbnail={saveMovie.thumbnail} savedMovies={savedMovies} onDelMovie={onDelMovie} />;
                     }
                     return null;
                 })}
             </ul>
-            {movies.length > listMovies && location.pathname !== "/saved-movies" && (
+            {savedMovies.length > listMovies && location.pathname !== "/saved-movies" && (
                 <button type="button" className="movies-cards-list__more-button" onClick={buttonMoreMovies}>
                     Еще
                 </button>

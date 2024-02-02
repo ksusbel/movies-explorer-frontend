@@ -1,8 +1,8 @@
 import "./MoviesCard.css";
 
-function MoviesCard({ movie, name, duration, thumbnail, onDelMovie }) {
+function MoviesCard({ saveMovie, name, duration, thumbnail, onDelMovie }) {
     function handleSaveDeleteClick() {
-        onDelMovie(movie);
+        onDelMovie(saveMovie);
     }
 
     return (

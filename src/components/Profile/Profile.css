@@ -34,12 +34,23 @@
   width: 100%;
   border-bottom: 1px solid #424242;
   display: flex;
+  flex-direction: column;
+}
+
+.profile__item-name {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.profile__item-email {
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
 .profile__name-name {
-  padding: 0 0 16px 0;
+  padding: 0;
 }
 
 .profile__name-email {
@@ -55,7 +66,7 @@
   all: unset;
   text-align: right;
   font-size: 11px;
-  padding: 0 5px 11px 0;
+  padding: 0 5px 0 0;
 }
 
 .profile__input-email {
@@ -100,38 +111,31 @@
 
 .profile__edit-results {
   margin: 0 0 20px 0;
-  text-align:center
+  text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .profile__edit-result {
-  color: #FF004C;
-font-size: 11px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+  color: #ff004c;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .profile__edit-result_hidden {
   display: none;
 }
 
-.profile__err {
-visibility: hidden;
-color: #FF004C;
-font-size: 11px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-}
-
 .profile__err_visible {
   visibility: visible;
 }
 
-.profile__submit-button {  
+.profile__submit-button {
   background-color: #4285f4;
   color: #fff;
-  margin: 160px 0 16px 0;
+  margin: 146px 0 16px 0;
   width: 100%;
   text-align: center;
   padding: 0;
@@ -143,13 +147,32 @@ line-height: normal;
   border-radius: 3px;
   border: none;
 }
-.hover {
-    opacity: 0.7;    
+.hover,
+.profile__submit-button:hover {
+  opacity: 0.7;
+  cursor: pointer;
 }
 
 .profile__submit-button:disabled {
-  background-color: #F8F8F8;
-  color: #C2C2C2;
+  background-color: #f8f8f8;
+  color: #c2c2c2;
+}
+
+.profile__input-error {
+  font-size: 10px;
+  line-height: 12px;
+  color: #ee3465;
+  visibility: visible;
+  height: 14px;
+  text-align: end;
+}
+
+.profile__message-succses {
+  font-size: 10px;
+  line-height: 12px;
+  color: #ee3465;
+  visibility: visible;
+  height: 14px;
 }
 
 @media screen and (min-width: 350px) {
@@ -176,7 +199,7 @@ line-height: normal;
 
 @media screen and (min-width: 768px) {
   .profile {
-    max-width: 410px;
+      max-width: 410px;
       padding: 71px 0;
   }
 

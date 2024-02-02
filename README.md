@@ -5,7 +5,7 @@
 
 Cсылка на pul request: https://github.com/ksusbel/movies-explorer-frontend/pull/2
 
-Ссылка на deploy: http://ksusbeldiplom.nomoredomainsmonster.ru/
+Ссылка на deploy: https://ksusbeldiplom.nomoredomainsmonster.ru/
 ___________________________
 ## Описание сайта:
 * Данный сайт предназначен для просмотра и сохранения фильмов в личном кабинете под своей учетной записью.

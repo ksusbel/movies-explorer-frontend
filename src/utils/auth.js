@@ -31,7 +31,7 @@ export const getUserInfo = () => {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
             "Cross-Origin-Resource-Policy": "cross-origin",
         },
     }).then((res) => getResponse(res));
