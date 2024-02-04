@@ -4,6 +4,16 @@
     margin: 0 auto;
 }
 
+.movies__search-error {
+    color: #EE3465;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: center;
+    
+}
+
 @media screen and (min-width: 385px) {
     .movies {
         max-width: 708px;

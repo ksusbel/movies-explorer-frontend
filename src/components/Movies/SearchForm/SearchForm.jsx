@@ -8,17 +8,17 @@ function SearchForm({ onSearchMovies }) {
     const [inputVal, setInputVal] = useState("");
     const [inputError, setInputError] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
-    const { location } = useLocation();
+    const location = useLocation();
 
-    const handeleField = (evt) => {
-        setInputVal(evt.target.value);
+    const handeleField = (e) => {
+        setInputVal(e.target.value);
     };
 
     // короткометражки
     const handelCheckbox = () => {
-        setShortMovies(!shortMovies);
         onSearchMovies(inputVal, !shortMovies);
-        if (location === "/movies") {
+        setShortMovies(!shortMovies);
+        if (location.pathname === "/movies") {
             localStorage.setItem("shortMovies", !shortMovies);
         }
     };
@@ -32,17 +32,16 @@ function SearchForm({ onSearchMovies }) {
         }
 
         setInputError(false);
-        if (location === "/movies") {
+        if (location.pathname === "/movies") {
             localStorage.setItem("request", inputVal);
         }
         onSearchMovies(inputVal, shortMovies);
-        setIsDisabled(true);
     };
 
     useEffect(() => {
-        if (location === "/movies") {
-            const getInputVal = localStorage.getItem("request");
+        if (location.pathname === "/movies") {
             const getShortMovies = JSON.parse(localStorage.getItem("shortMovies"));
+            const getInputVal = localStorage.getItem("request");
             if (getInputVal) {
                 setInputVal(getInputVal);
             }
@@ -60,7 +59,7 @@ function SearchForm({ onSearchMovies }) {
             <form className="search-form__form" autoComplete="off" noValidate onSubmit={handleSubmitSearch}>
                 <div className="search-form__form-block">
                     <input type="text" className="search-form__input" placeholder="Фильм" required name="search_input" id="search_input" value={inputVal} onChange={handeleField} />
-                    <button type="submit" className="search-form__button" disabled={isDisabled}></button>
+                    <button type="submit" className="search-form__button" disabled={isDisabled} minLength="2" maxLength="40"></button>
                 </div>
                 {!inputError ? <span className="search-form__error search-form__error_hidden">Введите запрос</span> : <span className="search-form__error">Введите запрос</span>}
                 <FilterCheckbox value={shortMovies} onChange={handelCheckbox}></FilterCheckbox>

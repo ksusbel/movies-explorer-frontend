@@ -4,7 +4,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import { CARDS_1280, CARDS_850, MAX_CARDS, CARDS_VAL_1280, CARDS_VAL_850, MAX_CARDS_VAL } from "../../../utils/constants";
 import "./MoviesCardList.css";
 
-function MoviesCardList({ movies, savedMovies, onSaveMovie, onDelMovie }) {
+function MoviesCardList({ movies, savedMovies, onSaveMovie, onDelMovie, searchError }) {
     const [listMovies, setListMovies] = useState(0);
     const [row, setRow] = useState(0);
     const location = useLocation();
@@ -44,12 +44,18 @@ function MoviesCardList({ movies, savedMovies, onSaveMovie, onDelMovie }) {
     return (
         <section className="movies-cards-list">
             <ul className="movies-cards-list__list">
-                {movies.map((movie, count) => {
-                    if (count < listMovies) {
-                        return <MoviesCard key={movie.id} movie={movie} savedMovies={savedMovies} onSaveMovie={onSaveMovie} onDelMovie={onDelMovie} />;
-                    }
-                    return null;
-                })}
+                {searchError ? (
+                    <span className="movies__search-error">{searchError}</span>
+                ) : (
+                    <>
+                        {movies.map((movie, count) => {
+                            if (count < listMovies) {
+                                return <MoviesCard key={movie.id} movie={movie} savedMovies={savedMovies} onSaveMovie={onSaveMovie} onDelMovie={onDelMovie} />;
+                            }
+                            return null;
+                        })}
+                    </>
+                )}
             </ul>
             {movies.length > listMovies && location.pathname !== "/saved-movies" && (
                 <button type="button" className="movies-cards-list__more-button" onClick={buttonMoreMovies}>

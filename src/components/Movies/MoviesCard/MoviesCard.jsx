@@ -1,10 +1,14 @@
 import "./MoviesCard.css";
 
-function MoviesCard({ movie, savedMovies, onSaveMovie }) {
+function MoviesCard({ movie, savedMovies, onSaveMovie, onDelMovie }) {
     const isLiked = savedMovies.some((i) => i.movieId === movie.id);
 
     function handleSaveClick() {
-        onSaveMovie(movie);
+        if (isLiked) {
+            onDelMovie(savedMovies.filter((i) => i.movieId === movie.id)[0]);
+        } else {
+            onSaveMovie(movie);
+        }
     }
 
     const movieSaveButtonClassName = `movies-card__save-button ${isLiked ? "movies-card__save-button_saved" : "movies-card__save-button_not-saved"}`;

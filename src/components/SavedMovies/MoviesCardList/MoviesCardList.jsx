@@ -4,7 +4,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import "../../Movies/MoviesCardList/MoviesCardList.css";
 import { CARDS_1280, CARDS_850, MAX_CARDS, CARDS_VAL_1280, CARDS_VAL_850, MAX_CARDS_VAL } from "../../../utils/constants";
 
-function MoviesCardList({ savedMovies, onDelMovie }) {
+function MoviesCardList({ savedMovies, onDelMovie, searchError }) {
     const [listMovies, setListMovies] = useState(0);
     const [row, setRow] = useState(0);
     const location = useLocation();
@@ -44,12 +44,29 @@ function MoviesCardList({ savedMovies, onDelMovie }) {
     return (
         <section className="movies-cards-list">
             <ul className="movies-cards-list__list">
-                {savedMovies.map((saveMovie, count) => {
-                    if (count < listMovies) {
-                        return <MoviesCard key={saveMovie.id} saveMovie={saveMovie} name={saveMovie.nameRU} duration={saveMovie.duration} trailerLink={saveMovie.trailerLink} thumbnail={saveMovie.thumbnail} savedMovies={savedMovies} onDelMovie={onDelMovie} />;
-                    }
-                    return null;
-                })}
+                {searchError ? (
+                    <span className="movies__search-error">{searchError}</span>
+                ) : (
+                    <>
+                        {savedMovies.map((saveMovie, count) => {
+                            if (count < listMovies) {
+                                return (
+                                    <MoviesCard
+                                        key={saveMovie.id}
+                                        saveMovie={saveMovie}
+                                        name={saveMovie.nameRU}
+                                        duration={saveMovie.duration}
+                                        trailerLink={saveMovie.trailerLink}
+                                        thumbnail={saveMovie.thumbnail}
+                                        savedMovies={savedMovies}
+                                        onDelMovie={onDelMovie}
+                                    />
+                                );
+                            }
+                            return null;
+                        })}
+                    </>
+                )}
             </ul>
             {savedMovies.length > listMovies && location.pathname !== "/saved-movies" && (
                 <button type="button" className="movies-cards-list__more-button" onClick={buttonMoreMovies}>
